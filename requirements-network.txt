@@ -1,0 +1,2 @@
+# 网络 IPMI（Windows 10/11 推荐；Linux 本地 /dev/ipmi* 模式不需要）
+pyghmi>=1.6

@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="color-scheme" content="light">
+  <title>Tesla T10 风扇控制器 · 实时监控面板</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <header class="topbar">
+    <div class="topbar-inner">
+      <div>
+        <h1>Tesla T10 风扇控制器</h1>
+        <p class="subtitle">Tesla T10 × 4 · 实时监控与控制</p>
+      </div>
+      <span id="conn-status" class="conn-status conn-pending" role="status">连接中…</span>
+    </div>
+  </header>
+
+  <div id="dry-run-banner" class="banner banner-dryrun" role="alert">
+    <strong>演练模式（dry-run）</strong>：当前不会向风扇下发真实控制命令，所有操作仅模拟执行。此横幅不可关闭。
+  </div>
+
+  <div id="readonly-banner" class="banner banner-info" role="note" hidden></div>
+  <div id="error-banner" class="banner banner-error" role="alert" hidden></div>
+
+  <main>
+    <section class="curve-panel" aria-labelledby="curve-title">
+      <header class="curve-head">
+        <div>
+          <h2 id="curve-title">自动温度曲线</h2>
+          <p class="curve-sub">横轴为 GPU 温度，纵轴为风扇目标占空比；拖动蓝色控制点（30–80°C）调整占空比，松开自动保存。圆点内数字为 GPU 编号</p>
+        </div>
+        <div class="curve-head-side">
+          <span id="curve-meta" class="curve-meta"></span>
+          <div class="curve-actions">
+            <span id="curve-status" class="curve-status" role="status" aria-live="polite"></span>
+            <button id="curve-reset" class="curve-reset" type="button">恢复默认曲线</button>
+          </div>
+        </div>
+      </header>
+      <div class="curve-body">
+        <div class="curve-chart-wrap">
+          <svg id="curve-chart" role="img" aria-label="GPU 温度与风扇占空比自动曲线"></svg>
+          <div id="curve-tooltip" class="curve-tooltip" hidden></div>
+        </div>
+        <div class="curve-table-wrap">
+          <table class="curve-table">
+            <caption class="sr-only">各 GPU 当前温度、目标占空比与实际占空比</caption>
+            <thead>
+              <tr><th scope="col">GPU</th><th scope="col">温度</th><th scope="col">目标</th><th scope="col">实际</th><th scope="col">模式</th></tr>
+            </thead>
+            <tbody id="curve-table-body"></tbody>
+          </table>
+        </div>
+      </div>
+    </section>
+
+    <section id="cards" class="cards" aria-label="GPU 状态卡片"></section>
+    <p id="empty-hint" class="empty-hint" hidden>尚未获取到 GPU 数据，正在重试…</p>
+  </main>
+
+  <footer class="page-footer">
+    <span id="last-update">上次更新：—</span>
+    <span aria-hidden="true"> · </span>
+    <span>每 1 秒自动刷新</span>
+  </footer>
+
+  <script src="app.js"></script>
+</body>
+</html>

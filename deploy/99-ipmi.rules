@@ -1,0 +1,5 @@
+# IPMI 字符设备访问权限（ASRock Rack EPYCD8 的带内 IPMI）
+# 注意：/dev/ipmi0 的 udev SUBSYSTEM 是 "ipmi"，不是 "char"；
+# 这里直接按内核设备名匹配，避免子系统写错导致规则不生效。
+# 安装到 /etc/udev/rules.d/99-ipmi.rules 或 /usr/lib/udev/rules.d/99-ipmi.rules
+KERNEL=="ipmi*", GROUP="ipmi", MODE="0660"

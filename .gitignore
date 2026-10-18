@@ -1,0 +1,24 @@
+# Python
+__pycache__/
+*.py[cod]
+*.egg-info/
+.venv/
+venv/
+
+# Local configuration (contains machine-specific mappings and may contain credentials)
+config.json
+config.json.v1.bak
+config.json.*.tmp
+
+# Build artifacts
+build/
+dist/
+packaging/*.spec.bak
+
+# Logs
+*.log
+
+# Editors / OS
+.idea/
+.vscode/
+.DS_Store

@@ -1,0 +1,32 @@
+[Unit]
+Description=Tesla T10 GPU fan controller (IPMI)
+After=network.target
+
+[Service]
+Type=simple
+# install.sh 会把下面这些路径/用户替换为实际值；手动安装时请按需修改。
+User=root
+Group=root
+WorkingDirectory=/opt/gpu-fan-controller
+Environment=PYTHONUNBUFFERED=1
+Environment=PYTHONDONTWRITEBYTECODE=1
+ExecStart=/usr/bin/python3 -m gpu_fan_controller --config /opt/gpu-fan-controller/config.json
+Restart=always
+RestartSec=2
+KillSignal=SIGTERM
+TimeoutStopSec=60
+
+NoNewPrivileges=yes
+PrivateTmp=yes
+ProtectSystem=strict
+ProtectHome=read-only
+ProtectKernelTunables=yes
+ProtectKernelModules=yes
+ProtectControlGroups=yes
+RestrictAddressFamilies=AF_INET AF_INET6 AF_UNIX
+
+# 允许把界面调整后的自动曲线写回 config.json
+ReadWritePaths=/opt/gpu-fan-controller
+
+[Install]
+WantedBy=multi-user.target
