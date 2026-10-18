@@ -1,9 +1,8 @@
 # Tesla T10 风扇控制器 V2.0
 
+[![tests](https://github.com/su32ub/tesla-t10-fan-controller/actions/workflows/tests.yml/badge.svg)](https://github.com/su32ub/tesla-t10-fan-controller/actions/workflows/tests.yml)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](LICENSE)
 
-<!-- 创建 GitHub 仓库后，把 OWNER 替换为你的用户名并取消注释即可显示 CI 徽章 -->
-<!-- [![tests](https://github.com/OWNER/tesla-t10-fan-controller/actions/workflows/tests.yml/badge.svg)](https://github.com/OWNER/tesla-t10-fan-controller/actions/workflows/tests.yml) -->
 
 针对 **4 张 NVIDIA Tesla T10** 的 GPU 温度控制：读取每张 T10 的核心温度，通过 IPMI 调节 ASRock Rack EPYCD8 主板对应风扇的跨平台应用。
 
